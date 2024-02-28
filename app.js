@@ -1,4 +1,8 @@
-// external import 
+/*
+|--------------------------------------------------------------------------
+| Import Dependencies
+|--------------------------------------------------------------------------
+*/
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
@@ -6,17 +10,41 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
 
-// internal import 
-const authRoute=require('./route/authRoute')
+/*
+|--------------------------------------------------------------------------
+| Import Internal Modules
+|--------------------------------------------------------------------------
+*/
+const authRoute=require('./route/authRoute');
+const {errorHandler,notFoundHandler}=require("./middlewares/common/errorHandler")
 
 
-// create app object 
+/*
+|--------------------------------------------------------------------------
+| Create express app
+|--------------------------------------------------------------------------
+*/
 const app = express();
+
+/*
+|--------------------------------------------------------------------------
+| Load Environment Variables
+|--------------------------------------------------------------------------
+*/
 dotenv.config();
+
+/*
+|--------------------------------------------------------------------------
+| Enables cors
+|--------------------------------------------------------------------------
+*/
 app.use(cors());
 
-
-// db connection 
+/*
+|--------------------------------------------------------------------------
+| Database connection
+|--------------------------------------------------------------------------
+*/
 mongoose.connect(
     process.env.NODE_ENV === 'development' ? process.env.MONGODB_CONNECTION_STRING_LOCAL : process.env.MONGODB_CONNECTION_STRING_PRODUCTION
 )
@@ -26,17 +54,42 @@ mongoose.connect(
         console.log(err.message));
 
 
-// parser 
+/*
+|--------------------------------------------------------------------------
+| Parse Incoming Request Bodies
+|--------------------------------------------------------------------------
+*/
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
 
-// routing setup
+/*
+|--------------------------------------------------------------------------
+| Routing Setup
+|--------------------------------------------------------------------------
+*/
 app.use('/api/v1/auth',authRoute);
 
+/*
+|--------------------------------------------------------------------------
+| Handle Not Found Routes
+|--------------------------------------------------------------------------
+*/
+app.use(notFoundHandler);
 
-// create server 
+/*
+|--------------------------------------------------------------------------
+| Error Handling Middleware
+|--------------------------------------------------------------------------
+*/
+app.use(errorHandler);
+
+/*
+|--------------------------------------------------------------------------
+| Start the Server
+|--------------------------------------------------------------------------
+*/
 app.listen(process.env.PORT || '5000', () => {
     console.log(`The app is running http://localhost:${process.env.PORT || '5000'}`);
 })
