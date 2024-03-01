@@ -1,6 +1,5 @@
-import { AuthLoginController } from '../controller/auth/loginController';
-import { AuthRegistrationController } from '../controller/auth/registrationController';
-import { AuthRegistrationErrorHandler, AuthRegistrationValidator } from '../middlewares/auth/registrationValidator';
+import { createScore } from '../controller/score/createScore';
+import { authGuard } from '../middlewares/common/authGuard';
 /*
 |--------------------------------------------------------------------------
 | Import Dependencies
@@ -20,6 +19,6 @@ const route = express.Router();
 | User Registraion Route
 |--------------------------------------------------------------------------
 */
-route.post('/create', AuthRegistrationController);
+route.post('/create', authGuard, createScore);
 
 module.exports = route;

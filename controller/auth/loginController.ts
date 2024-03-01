@@ -19,37 +19,36 @@ export const AuthLoginController: RequestHandler<RequestBodyTypes> = async (req,
         const user = await (AuthModel as any).findOneUser(req.body.username);
         if (user) {
             const isPasswordValid = await bcrypt.compare(req.body.password, user.password);
-            const {username} = user;
+            const { username } = user;
             if (isPasswordValid) {
-                const token = jwt.sign({username}, process.env.JWT_SECRET,{
-                    expiresIn:'1h'
+                const token = jwt.sign({ username }, process.env.JWT_SECRET, {
+                    expiresIn: '1h'
                 });
-                log(token)
+
                 res.locals.loggedUser = username;
 
-                res.cookie('scoreboard', username, {
+                res.cookie('scoreboard', { username, token }, {
                     maxAge: 3600000,
                     httpOnly: true,
                     signed: true,
                 });
 
-                return res.status(200).json({
+                res.status(200).json({
                     token,
                     msg: "Login Successfull!"
                 });
             } else {
-                return res.status(500).json({
+                res.status(500).json({
                     msg: "Authentication failed!"
                 })
             }
         } else {
-            return res.status(500).json({
+            res.status(500).json({
                 msg: "Authentication failed!"
             })
         }
     } catch (error: any) {
-        console.error("Error:", error.message);
-        return res.status(500).json({
+        res.status(500).json({
             msg: "Internal Server Error"
         });
     }

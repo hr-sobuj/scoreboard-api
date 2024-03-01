@@ -30,7 +30,7 @@ export const scoreSchema = new Schema<ScoreTypes & Document>({
     },
     role: {
         type: String,
-        enum: ['batting', 'balling'],
+        enum: ['bat', 'ball'],
         required: true
     }
 }, {
