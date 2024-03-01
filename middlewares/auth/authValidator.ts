@@ -35,14 +35,14 @@ export const AuthValidator: RequestHandler[] = [
 | Here Handling the error which is generated from AuthValidator
 |--------------------------------------------------------------------------
 */
-export const AuthErrorHandler:RequestHandler = (req: any, res: any, next: any) => {
+export const AuthErrorHandler: RequestHandler = (req: any, res: any, next: any) => {
     const error = validationResult(req);
     const errorMapped = error.mapped();
     if (Object.keys(errorMapped).length === 0) {
         next();
     } else {
         res.status(500).json({
-            errors: errorMapped,
+            msg: Object.keys(errorMapped).map(val => errorMapped[val].msg),
         });
     }
 }

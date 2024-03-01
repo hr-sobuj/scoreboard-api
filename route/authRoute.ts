@@ -1,6 +1,6 @@
 import { password } from 'bun';
 import { AuthErrorHandler, AuthValidator } from '../middlewares/auth/authValidator';
-import AuthController from '../controller/auth/authController';
+import { AuthController } from '../controller/auth/authController';
 /*
 |--------------------------------------------------------------------------
 | Import Dependencies
@@ -20,7 +20,7 @@ const route = express.Router();
 | User Registraion Route
 |--------------------------------------------------------------------------
 */
-route.post('/registration', AuthValidator, AuthErrorHandler, AuthController )
+route.post('/registration', AuthValidator, AuthErrorHandler, AuthController)
 
 
 module.exports = route;

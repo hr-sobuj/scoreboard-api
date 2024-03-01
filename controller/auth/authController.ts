@@ -1,9 +1,13 @@
-import { log } from "console";
+import type { Request, RequestHandler, Response } from "express";
 import { AuthModel } from "../../model/authModel";
+import type { AuthTypes } from "../../types/authTypes";
+const bcrypt = require('bcrypt')
 
-const bcrypt = require('bcrypt');
+interface RequestBodyTypes extends Request {
+    body: AuthTypes
+}
 
-export default async function AuthController(req: any, res: any) {
+export const AuthController: RequestHandler<RequestBodyTypes> = async (req, res) => {
     try {
         const hashPassword = await bcrypt.hash(req.body.password, 10,)
         const requestBody = {

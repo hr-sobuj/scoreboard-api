@@ -1,4 +1,4 @@
-import { Document, Schema, model, type SchemaDefinitionProperty } from "mongoose";
+import { Document, Schema, model } from "mongoose";
 import type { AuthTypes } from "../types/authTypes";
 
 /*
@@ -18,7 +18,7 @@ export const authSchema = new Schema<AuthTypes & Document>({
         required: true,
     },
     role: {
-        enum: ['admin', 'general']
+        enum: ['admin', 'general'],
     }
 }, {
     timestamps: true
