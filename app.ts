@@ -50,7 +50,7 @@ mongoose.connect(
 )
     .then(() =>
         console.log('Database Connected'))
-    .catch((err) =>
+    .catch((err: Error) =>
         console.log(err.message));
 
 
