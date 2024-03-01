@@ -10,7 +10,6 @@ export const scoreSchema = new Schema<ScoreTypes & Document>({
     name: {
         type: String,
         required: true,
-        match: /^[a-zA-Z0-9]+$/
     },
     b4: {
         type: Number,

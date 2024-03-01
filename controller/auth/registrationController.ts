@@ -21,7 +21,7 @@ export const AuthRegistrationController: RequestHandler<RequestBodyTypes> = asyn
         }
 
         const newUser = new AuthModel(requestBody);
-        newUser.save();
+        await newUser.save();
 
         if (newUser) {
             res.json({
