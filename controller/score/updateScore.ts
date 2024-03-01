@@ -29,10 +29,14 @@ export const updateScore: RequestHandler<RequestBody> = async (req, res) => {
                 msg:"Updated!",
                 data:result,
             })
+        }else{
+            res.status(500).json({
+                msg: "Updation failed!"
+            })
         }
     } catch (error: any) {
         res.status(500).json({
-            msg: "Creation failed!"
+            msg: "Updation failed!"
         })
     }
 }

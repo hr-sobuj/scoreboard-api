@@ -1,29 +1,35 @@
 import type { Document } from "mongoose";
 import type { ScoreTypes } from "../../types/scoreTypes";
 import type { Request, RequestHandler } from "express";
-import { ScoreModel } from "../../model/scoreModel";
+import { ScoreModel } from '../../model/scoreModel';
+import { log } from "console";
 
 interface RequestBody extends Request {
     body: ScoreTypes,
+    id: string
 }
 
 /*
 |--------------------------------------------------------------------------
-| Delete score
+| Update score
 |--------------------------------------------------------------------------
 */
-export const deleteScore: RequestHandler<RequestBody> = async (req,res) => {
+export const deleteScore: RequestHandler<RequestBody> = async (req, res) => {
     try {
-        const newScore=new ScoreModel(req.body);
-        newScore.save();
-        if(newScore){
-            res.status(200).json({
-                msg:"New score added!",
+        const id = req.params.id;
+        const result = await ScoreModel.findByIdAndDelete({ _id: id });
+        if(result){
+            res.status(201).json({
+                msg:"Deleted!"
+            });
+        }else{
+            res.status(201).json({
+                msg:"Deletion failed!"
             });
         }
-    } catch (error:any) {
+    } catch (error: any) {
         res.status(500).json({
-            msg:"Creation failed!"
+            msg: "Creation failed!"
         })
     }
 }
