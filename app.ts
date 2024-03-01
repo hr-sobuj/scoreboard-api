@@ -70,6 +70,7 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 |--------------------------------------------------------------------------
 */
 app.use('/api/v1/auth',authRoute);
+app.use('/api/v1/score',authRoute);
 
 /*
 |--------------------------------------------------------------------------

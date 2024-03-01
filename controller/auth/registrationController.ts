@@ -7,7 +7,12 @@ interface RequestBodyTypes extends Request {
     body: AuthTypes
 }
 
-export const AuthController: RequestHandler<RequestBodyTypes> = async (req, res) => {
+/*
+|--------------------------------------------------------------------------
+| Registration controller
+|--------------------------------------------------------------------------
+*/
+export const AuthRegistrationController: RequestHandler<RequestBodyTypes> = async (req, res, next) => {
     try {
         const hashPassword = await bcrypt.hash(req.body.password, 10,)
         const requestBody = {
@@ -25,6 +30,6 @@ export const AuthController: RequestHandler<RequestBodyTypes> = async (req, res)
         }
 
     } catch (error: any) {
-
+        next(error.message)
     }
 }

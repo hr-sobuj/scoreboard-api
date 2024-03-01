@@ -20,14 +20,6 @@ const route = express.Router();
 | User Registraion Route
 |--------------------------------------------------------------------------
 */
-route.post('/registration', AuthRegistrationValidator, AuthRegistrationErrorHandler, AuthRegistrationController);
-
-/*
-|--------------------------------------------------------------------------
-| User Login Route
-|--------------------------------------------------------------------------
-*/
-route.post('/login', AuthLoginController);
-
+route.post('/create', AuthRegistrationController);
 
 module.exports = route;
