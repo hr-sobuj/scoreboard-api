@@ -15,6 +15,7 @@ interface RequestBodyTypes extends Request {
 |--------------------------------------------------------------------------
 */
 export const AuthLoginController: RequestHandler<RequestBodyTypes> = async (req, res) => {
+    log(req.body)
     try {
         const user = await (AuthModel as any).findOneUser(req.body.username);
         if (user) {
@@ -48,6 +49,7 @@ export const AuthLoginController: RequestHandler<RequestBodyTypes> = async (req,
             })
         }
     } catch (error: any) {
+        log(error.message)
         res.status(500).json({
             msg: "Internal Server Error"
         });

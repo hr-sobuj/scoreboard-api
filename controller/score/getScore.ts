@@ -1,6 +1,8 @@
+import type { Document } from "mongoose";
 import type { ScoreTypes } from "../../types/scoreTypes";
 import type { Request, RequestHandler } from "express";
 import { ScoreModel } from '../../model/scoreModel';
+import { log } from "console";
 
 interface RequestBody extends Request {
     body: ScoreTypes,
@@ -12,22 +14,23 @@ interface RequestBody extends Request {
 | Update score
 |--------------------------------------------------------------------------
 */
-export const deleteScore: RequestHandler<RequestBody> = async (req, res) => {
+export const getScore: RequestHandler<RequestBody> = async (req, res) => {
     try {
         const id = req.params.id;
-        const result = await ScoreModel.findByIdAndDelete({ _id: id });
+        const result = await ScoreModel.findOne({_id:id},'-createdAt -updatedAt -_id -__v');
+
         if(result){
             res.status(201).json({
-                msg:"Deleted!"
-            });
+                data:result,
+            })
         }else{
-            res.status(201).json({
-                msg:"Deletion failed!"
-            });
+            res.status(500).json({
+                msg: "Operation failed!"
+            })
         }
     } catch (error: any) {
         res.status(500).json({
-            msg: "Creation failed!"
+            msg: "Operation failed!"
         })
     }
 }
