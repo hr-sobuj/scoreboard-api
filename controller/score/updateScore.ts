@@ -26,7 +26,6 @@ export const updateScore: RequestHandler<RequestBody> = async (req, res) => {
         });
         if(result){
             res.status(201).json({
-                msg:"Updated!",
                 data:result,
             })
         }else{

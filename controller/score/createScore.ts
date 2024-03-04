@@ -19,6 +19,7 @@ export const createScore: RequestHandler<RequestBody> = async (req,res) => {
         if(newScore){
             res.status(200).json({
                 msg:"New score added!",
+                data:newScore
             });
         }
     } catch (error:any) {

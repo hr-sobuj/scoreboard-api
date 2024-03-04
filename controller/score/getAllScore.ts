@@ -16,8 +16,8 @@ interface RequestBody extends Request {
 */
 export const getAllScore: RequestHandler<RequestBody> = async (req, res) => {
     try {
-        const result = await ScoreModel.find({},'-createdAt -updatedAt -_id -__v');
-        log(result);
+        const result = await ScoreModel.find({},'-createdAt -updatedAt -__v');
+        // log(result);
         if(result){
             res.status(201).json({
                 data:result,

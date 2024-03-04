@@ -9,15 +9,14 @@ const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
-
 /*
 |--------------------------------------------------------------------------
 | Import Internal Modules
 |--------------------------------------------------------------------------
 */
-const authRoute=require('./route/authRoute');
-const scoreRoute=require('./route/scoreRoute');
-const {errorHandler,notFoundHandler}=require("./middlewares/common/errorHandler")
+const authRoute = require('./route/authRoute');
+const scoreRoute = require('./route/scoreRoute');
+const { errorHandler, notFoundHandler } = require("./middlewares/common/errorHandler")
 
 
 /*
@@ -39,7 +38,13 @@ dotenv.config();
 | Enables cors
 |--------------------------------------------------------------------------
 */
-app.use(cors());
+const corsOptions={
+    origin:true,
+    credentials:true,
+    methods:['GET', 'PUT', 'POST', 'DELETE'],
+    maxAge:3600000,
+}
+app.use(cors(corsOptions));
 
 /*
 |--------------------------------------------------------------------------
@@ -64,14 +69,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
-
 /*
 |--------------------------------------------------------------------------
 | Routing Setup
 |--------------------------------------------------------------------------
 */
-app.use('/api/v1/auth',authRoute);
-app.use('/api/v1/score',scoreRoute);
+app.use('/api/v1/auth', authRoute);
+app.use('/api/v1/score', scoreRoute);
 
 /*
 |--------------------------------------------------------------------------

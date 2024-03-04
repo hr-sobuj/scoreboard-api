@@ -15,7 +15,7 @@ interface RequestBodyTypes extends Request {
 |--------------------------------------------------------------------------
 */
 export const AuthLoginController: RequestHandler<RequestBodyTypes> = async (req, res) => {
-    log(req.body)
+
     try {
         const user = await (AuthModel as any).findOneUser(req.body.username);
         if (user) {
@@ -31,7 +31,9 @@ export const AuthLoginController: RequestHandler<RequestBodyTypes> = async (req,
                 res.cookie('scoreboard', { username, token }, {
                     maxAge: 3600000,
                     httpOnly: true,
-                    signed: true,
+                    secure:true,
+                    // signed: true,
+                    sameSite:"none"
                 });
 
                 res.status(200).json({

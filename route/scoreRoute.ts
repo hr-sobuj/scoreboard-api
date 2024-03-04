@@ -5,6 +5,9 @@ import { getScore } from '../controller/score/getScore';
 import { updateScore } from '../controller/score/updateScore';
 import { authGuard } from '../middlewares/common/authGuard';
 import { scoreErrorHandler, scoreValidator } from '../middlewares/score/scoreValidator';
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Import Dependencies

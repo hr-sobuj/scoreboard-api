@@ -17,7 +17,7 @@ interface RequestBody extends Request {
 export const getScore: RequestHandler<RequestBody> = async (req, res) => {
     try {
         const id = req.params.id;
-        const result = await ScoreModel.findOne({_id:id},'-createdAt -updatedAt -_id -__v');
+        const result = await ScoreModel.findOne({_id:id},'-createdAt -updatedAt -__v');
 
         if(result){
             res.status(201).json({
