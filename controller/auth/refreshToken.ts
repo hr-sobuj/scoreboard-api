@@ -25,7 +25,8 @@ export const refreshToken: RequestHandler<RequestBodyTypes> = async (req, res) =
                 expiresIn: '1h'
             });
             res.status(200).json({
-                'refresh-token': regenerateToken,
+                'accessToken': regenerateToken,
+                username
             });
         } else {
             res.status(500).json({
