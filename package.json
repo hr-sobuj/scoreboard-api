@@ -24,9 +24,13 @@
     "typescript": "^5.3.3"
   },
   "scripts": {
-    "start": "ts-node app.ts",
+    "start": "nodemon app.ts",
     "dev": "NODE_ENV=development nodemon --exec ts-node app.ts",
-    "production": "NODE_ENV=production nodemon app.js"
+    "production": "NODE_ENV=production nodemon app.js",
+    "build": "rimraf dist && tsc",
+    "ts.check": "tsc --project tsconfig.json",
+    "add-build": "git add dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "type": "commonjs",
   "pre-commit": [
