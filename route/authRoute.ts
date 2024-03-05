@@ -1,6 +1,8 @@
 import { AuthLoginController } from '../controller/auth/loginController';
+import { refreshToken } from '../controller/auth/refreshToken';
 import { AuthRegistrationController } from '../controller/auth/registrationController';
 import { AuthRegistrationErrorHandler, AuthRegistrationValidator } from '../middlewares/auth/registrationValidator';
+import { authGuard } from '../middlewares/common/authGuard';
 /*
 |--------------------------------------------------------------------------
 | Import Dependencies
@@ -28,6 +30,13 @@ route.post('/registration', AuthRegistrationValidator, AuthRegistrationErrorHand
 |--------------------------------------------------------------------------
 */
 route.post('/login', AuthLoginController);
+
+/*
+|--------------------------------------------------------------------------
+| Refresh token Route
+|--------------------------------------------------------------------------
+*/
+route.get('/refresh-token', authGuard, refreshToken);
 
 
 module.exports = route;

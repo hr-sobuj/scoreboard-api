@@ -25,7 +25,7 @@ export const AuthLoginController: RequestHandler<RequestBodyTypes> = async (req,
                 const token = jwt.sign({ username }, process.env.JWT_SECRET, {
                     expiresIn: '1h'
                 });
-
+                
                 res.locals.loggedUser = username;
 
                 res.cookie('scoreboard', { username, token }, {
