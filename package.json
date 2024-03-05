@@ -24,7 +24,8 @@
     "typescript": "^5.3.3"
   },
   "scripts": {
-    "start": "NODE_ENV=development nodemon --exec ts-node app.ts",
+    "start": "ts-node app.ts",
+    "dev": "NODE_ENV=development nodemon --exec ts-node app.ts",
     "production": "NODE_ENV=production nodemon app.js"
   },
   "type": "commonjs"

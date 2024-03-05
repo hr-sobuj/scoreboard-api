@@ -1,4 +1,4 @@
-import type { Request, RequestHandler, Response } from "express";
+import type { Request, RequestHandler } from "express";
 import { AuthModel } from "../../model/authModel";
 import type { AuthTypes } from "../../types/authTypes";
 const bcrypt = require('bcrypt')
