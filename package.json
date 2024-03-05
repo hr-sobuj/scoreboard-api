@@ -28,5 +28,10 @@
     "dev": "NODE_ENV=development nodemon --exec ts-node app.ts",
     "production": "NODE_ENV=production nodemon app.js"
   },
-  "type": "commonjs"
+  "type": "commonjs",
+  "pre-commit": [
+    "ts.check",
+    "build",
+    "add-build"
+]
 }
