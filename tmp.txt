@@ -1,0 +1,1 @@
+bun intall bcrypt cookie-parser cors dotenv express express-validator http-errors jsonwebtoken mongoose
