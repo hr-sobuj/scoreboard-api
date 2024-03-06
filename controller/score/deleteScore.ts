@@ -9,7 +9,7 @@ interface RequestBody extends Request {
 
 /*
 |--------------------------------------------------------------------------
-| Update score
+| Delete score
 |--------------------------------------------------------------------------
 */
 export const deleteScore: RequestHandler<RequestBody> = async (req, res) => {
