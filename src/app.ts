@@ -26,7 +26,7 @@ try {
     .connect(MONGO_URI as string)
     .then(() => {
       console.log("DB Connected!");
-      app.listen(PORT, () => console.log(`Server Ok ? ${PORT}`));
+      app.listen(PORT, () => console.log(`Server Ok ? http://localhost:${PORT}`));
     })
     .catch((error) => {
       console.log(error);
