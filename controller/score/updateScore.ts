@@ -1,8 +1,6 @@
-import type { Document } from "mongoose";
 import type { ScoreTypes } from "../../types/scoreTypes";
 import type { Request, RequestHandler } from "express";
 import { ScoreModel } from '../../model/scoreModel';
-import { log } from "console";
 
 interface RequestBody extends Request {
     body: ScoreTypes,

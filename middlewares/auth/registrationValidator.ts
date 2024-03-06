@@ -8,7 +8,7 @@ import type { RequestHandler } from "express";
 | This method validate the request body
 |--------------------------------------------------------------------------
 */
-export const AuthRegistrationValidator: RequestHandler[] = [
+export const authRegistrationValidator: RequestHandler[] = [
     check('username')
         .isAlphanumeric()
         .withMessage('Please provide a correct username!')
@@ -35,7 +35,7 @@ export const AuthRegistrationValidator: RequestHandler[] = [
 | Here Handling the error which is generated from AuthValidator
 |--------------------------------------------------------------------------
 */
-export const AuthRegistrationErrorHandler: RequestHandler = (req: any, res: any, next: any) => {
+export const authRegistrationErrorHandler: RequestHandler = (req: any, res: any, next: any) => {
     const error = validationResult(req);
     const errorMapped = error.mapped();
     if (Object.keys(errorMapped).length === 0) {

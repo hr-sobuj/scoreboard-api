@@ -1,7 +1,7 @@
 import type { Request, RequestHandler } from "express";
 import { AuthModel } from "../../model/authModel";
 import type { AuthTypes } from "../../types/authTypes";
-const bcrypt = require('bcrypt')
+import bcrypt from 'bcrypt';
 
 interface RequestBodyTypes extends Request {
     body: AuthTypes
@@ -12,7 +12,7 @@ interface RequestBodyTypes extends Request {
 | Registration controller
 |--------------------------------------------------------------------------
 */
-export const AuthRegistrationController: RequestHandler<RequestBodyTypes> = async (req, res, next) => {
+export const authRegistrationController: RequestHandler<RequestBodyTypes> = async (req, res, next) => {
     try {
         const hashPassword = await bcrypt.hash(req.body.password, 10,)
         const requestBody = {

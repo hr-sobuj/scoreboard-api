@@ -57,4 +57,4 @@ route.put('/update/:id', authGuard, updateScore);
 */
 route.delete('/delete/:id', authGuard, deleteScore);
 
-module.exports = route;
+export default route;

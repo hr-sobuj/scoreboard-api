@@ -1,7 +1,7 @@
-import { AuthLoginController } from '../controller/auth/loginController';
+import { authLoginController } from '../controller/auth/loginController';
 import { refreshToken } from '../controller/auth/refreshToken';
-import { AuthRegistrationController } from '../controller/auth/registrationController';
-import { AuthRegistrationErrorHandler, AuthRegistrationValidator } from '../middlewares/auth/registrationValidator';
+import { authRegistrationController } from '../controller/auth/registrationController';
+import { authRegistrationErrorHandler, authRegistrationValidator } from '../middlewares/auth/registrationValidator';
 import { authGuard } from '../middlewares/common/authGuard';
 /*
 |--------------------------------------------------------------------------
@@ -22,14 +22,14 @@ const route = express.Router();
 | User Registraion Route
 |--------------------------------------------------------------------------
 */
-route.post('/registration', AuthRegistrationValidator, AuthRegistrationErrorHandler, AuthRegistrationController);
+route.post('/registration', authRegistrationValidator, authRegistrationErrorHandler, authRegistrationController);
 
 /*
 |--------------------------------------------------------------------------
 | User Login Route
 |--------------------------------------------------------------------------
 */
-route.post('/login', AuthLoginController);
+route.post('/login', authLoginController);
 
 /*
 |--------------------------------------------------------------------------
@@ -39,4 +39,4 @@ route.post('/login', AuthLoginController);
 route.get('/refresh-token', authGuard, refreshToken);
 
 
-module.exports = route;
+export default route;

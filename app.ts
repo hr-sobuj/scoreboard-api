@@ -3,20 +3,20 @@
 | Import Dependencies
 |--------------------------------------------------------------------------
 */
-const express = require('express');
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-const cookieParser = require('cookie-parser');
-const cors = require('cors');
+import express from 'express';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
 
 /*
 |--------------------------------------------------------------------------
 | Import Internal Modules
 |--------------------------------------------------------------------------
 */
-const authRoute = require('./route/authRoute');
-const scoreRoute = require('./route/scoreRoute');
-const { errorHandler, notFoundHandler } = require("./middlewares/common/errorHandler")
+import authRoute from './route/authRoute';
+import scoreRoute from './route/scoreRoute';
+import { errorHandler, notFoundHandler } from "./middlewares/common/errorHandler";
 
 
 /*

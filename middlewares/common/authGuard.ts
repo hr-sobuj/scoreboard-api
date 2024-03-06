@@ -1,9 +1,8 @@
-import { log } from "console";
-import type { NextFunction,Request,Response } from "express";
-const jwt=require('jsonwebtoken');
+import type { NextFunction, Request, Response } from "express";
+import jwt from 'jsonwebtoken';
 
-interface RequestBody extends Request{
-    username?:string,
+interface RequestBody extends Request {
+    username?: string,
 }
 
 /*
@@ -13,9 +12,9 @@ interface RequestBody extends Request{
 */
 export function authGuard(req: RequestBody, res: Response, next: NextFunction) {
     const token = req.headers['authorization']?.split(' ')[1];
-    const isToken=jwt.verify(token,process.env.JWT_SECRET);
-    if(isToken){
-        req.username=isToken.username;
+    const isToken: any = jwt.verify(token, process.env.JWT_SECRET);
+    if (isToken) {
+        req.username = isToken.username;
         next();
-    } 
+    }
 }

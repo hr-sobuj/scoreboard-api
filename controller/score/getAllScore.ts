@@ -1,8 +1,6 @@
-import type { Document } from "mongoose";
 import type { ScoreTypes } from "../../types/scoreTypes";
 import type { Request, RequestHandler } from "express";
 import { ScoreModel } from '../../model/scoreModel';
-import { log } from "console";
 
 interface RequestBody extends Request {
     body: ScoreTypes,
@@ -17,7 +15,6 @@ interface RequestBody extends Request {
 export const getAllScore: RequestHandler<RequestBody> = async (req, res) => {
     try {
         const result = await ScoreModel.find({},'-createdAt -updatedAt -__v');
-        // log(result);
         if(result){
             res.status(201).json({
                 data:result,

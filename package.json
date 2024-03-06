@@ -3,6 +3,7 @@
   "module": "app.ts",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
@@ -13,9 +14,14 @@
     "mongoose": "^8.2.0"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/bcryptjs": "^2.4.6",
     "@types/bun": "latest",
+    "@types/cookie-parser": "^1.4.7",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
+    "@types/http-errors": "^2.0.4",
+    "@types/jsonwebtoken": "^9.0.6",
     "@types/mongoose": "^5.11.97",
     "@types/node": "^20.11.24",
     "nodemon": "^3.1.0",
@@ -37,5 +43,5 @@
     "ts.check",
     "build",
     "add-build"
-]
+  ]
 }

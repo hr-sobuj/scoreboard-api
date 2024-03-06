@@ -1,9 +1,8 @@
 import type { Request, RequestHandler, Response } from "express";
 import { AuthModel } from "../../model/authModel";
 import type { AuthTypes } from "../../types/authTypes";
-import { log } from "console";
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 interface RequestBodyTypes extends Request {
     body: AuthTypes
@@ -14,7 +13,7 @@ interface RequestBodyTypes extends Request {
 | Login controller
 |--------------------------------------------------------------------------
 */
-export const AuthLoginController: RequestHandler<RequestBodyTypes> = async (req, res) => {
+export const authLoginController: RequestHandler<RequestBodyTypes> = async (req, res) => {
 
     try {
         const user = await (AuthModel as any).findOneUser(req.body.username);
@@ -51,7 +50,6 @@ export const AuthLoginController: RequestHandler<RequestBodyTypes> = async (req,
             })
         }
     } catch (error: any) {
-        log(error.message)
         res.status(500).json({
             msg: "Internal Server Error"
         });
