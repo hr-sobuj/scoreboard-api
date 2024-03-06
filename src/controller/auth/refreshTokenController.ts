@@ -1,28 +1,20 @@
-import type { Request, RequestHandler, Response } from "express";
-import type { AuthTypes } from "../../types/authTypes";
+import type { Request, Response } from "express";
 import jwt from 'jsonwebtoken';
+import { JWT_SECRET } from "../../config/envConfig";
 
-interface RequestBodyTypes extends Request {
-    body: AuthTypes
-}
 
-/*
-|--------------------------------------------------------------------------
-| Refresh token controller
-|--------------------------------------------------------------------------
-*/
-export const refreshTokenController: RequestHandler<RequestBodyTypes> = async (req, res) => {
+export const refreshTokenController = async (req:Request, res:Response) => {
     try {
         const refreshToken = req.cookies.refreshToken.rfreshtoken;
         try {
-            const isValid: any = jwt.verify(refreshToken, process.env.JWT_SECRET);
+            const isValid: any = jwt.verify(refreshToken, JWT_SECRET);
             const { username } = isValid;
             if (isValid) {
-                const token = jwt.sign({username}, process.env.JWT_SECRET, {
+                const token = jwt.sign({username}, JWT_SECRET, {
                     expiresIn: '.01h'
                 });
 
-                const rfreshtoken = jwt.sign({ username }, process.env.JWT_SECRET);
+                const rfreshtoken = jwt.sign({ username }, JWT_SECRET);
 
                 res.cookie('authInfo', { username, token }, {
                     maxAge: 3600000,
