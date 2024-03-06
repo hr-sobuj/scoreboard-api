@@ -11,7 +11,7 @@ interface RequestBody extends Request {
 |--------------------------------------------------------------------------
 */
 export function authGuard(req: RequestBody, res: Response, next: NextFunction) {
-    const token = req.headers['authorization']?.split(' ')[1];
+    const token = req.cookies.scoreboard.token;
     const isToken: any = jwt.verify(token, process.env.JWT_SECRET);
     if (isToken) {
         req.username = isToken.username;
