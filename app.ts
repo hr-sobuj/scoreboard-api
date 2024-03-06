@@ -38,11 +38,11 @@ dotenv.config();
 | Enables cors
 |--------------------------------------------------------------------------
 */
-const corsOptions={
-    origin:true,
-    credentials:true,
-    methods:['GET', 'PUT', 'POST', 'DELETE'],
-    maxAge:3600000,
+const corsOptions = {
+    origin: true,
+    credentials: true,
+    methods: ['GET', 'PUT', 'POST', 'DELETE'],
+    maxAge: 3600000,
 }
 app.use(cors(corsOptions));
 
@@ -52,7 +52,7 @@ app.use(cors(corsOptions));
 |--------------------------------------------------------------------------
 */
 mongoose.connect(
-    process.env.NODE_ENV === 'development' ? process.env.MONGODB_CONNECTION_STRING_LOCAL : process.env.MONGODB_CONNECTION_STRING_PRODUCTION
+    process.env.NODE_ENV === 'development' ? process.env.MONGODB_CONNECTION_STRING_LOCAL as string : process.env.MONGODB_CONNECTION_STRING_PRODUCTION as string
 )
     .then(() =>
         console.log('Database Connected'))

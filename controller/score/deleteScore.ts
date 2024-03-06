@@ -17,17 +17,17 @@ export const deleteScore: RequestHandler<RequestBody> = async (req, res) => {
         const id = req.params.id;
         const result = await ScoreModel.findByIdAndDelete({ _id: id });
         if(result){
-            res.status(201).json({
+            res.status(202).json({
                 msg:"Deleted!"
             });
         }else{
-            res.status(201).json({
+            res.status(400).json({
                 msg:"Deletion failed!"
             });
         }
     } catch (error: any) {
         res.status(500).json({
-            msg: "Creation failed!"
+            msg: "Operation failed!"
         })
     }
 }
