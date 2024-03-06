@@ -5,6 +5,7 @@ import {
   authRegistrationErrorHandler,
   authRegistrationValidator,
 } from "../middlewares/auth/registrationValidator";
+import { refreshTokenController } from "../controller/auth/refreshTokenController";
 
 const route = Router();
 
@@ -17,6 +18,6 @@ route.post(
 
 route.post("/login", authLoginController);
 
-// route.get("/refresh-token", authGuard, refreshToken);
+route.get("/refresh-token", refreshTokenController);
 
 export default route;
