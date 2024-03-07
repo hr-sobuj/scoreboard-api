@@ -9,11 +9,11 @@ export const deleteScore = async (
     const id = req.params.id;
     const result = await ScoreModel.findByIdAndDelete({ _id: id });
     if (result) {
-      res.status(201).json({
+      res.status(204).json({
         msg: "Deleted!",
       });
     } else {
-      res.status(201).json({
+      res.status(400).json({
         msg: "Deletion failed!",
       });
     }

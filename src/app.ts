@@ -10,6 +10,7 @@ import {
 } from "./middlewares/common/errorHandler";
 import { MONGO_URI, PORT } from "./config/envConfig";
 
+
 const app = express();
 
 const corsOptions = {
@@ -26,7 +27,7 @@ try {
     .connect(MONGO_URI as string)
     .then(() => {
       console.log("DB Connected!");
-      app.listen(PORT, () => console.log(`Server Ok ? http://localhost:${PORT}`));
+      app.listen(PORT, () => console.log(`Server is running at http://localhost:${PORT}`));
     })
     .catch((error) => {
       console.log(error);
@@ -39,11 +40,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.get("/", (_, res) => {
-  res.send({
-    isOk: true,
-  });
-});
 
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/score", scoreRoute);
