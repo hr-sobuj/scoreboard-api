@@ -1,5 +1,5 @@
 import express from "express";
-import mongoose, { ConnectOptions } from "mongoose";
+import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import authRoute from "./route/authRoute";
@@ -8,7 +8,7 @@ import {
   errorHandler,
   notFoundHandler,
 } from "./middlewares/common/errorHandler";
-import { MONGO_URI, PORT } from "./config/envConfig";
+import { MONGO_CONNECTION_STRING_DEVELOPMENT, MONGO_CONNECTION_STRING_PRODUCTION, NODE_ENV, PORT } from "./config/envConfig";
 
 
 const app = express();
@@ -24,7 +24,9 @@ app.use(cors(corsOptions));
 
 try {
   mongoose
-    .connect(MONGO_URI as string)
+    .connect(
+      NODE_ENV === 'development' ? MONGO_CONNECTION_STRING_DEVELOPMENT : MONGO_CONNECTION_STRING_PRODUCTION
+    )
     .then(() => {
       console.log("DB Connected!");
       app.listen(PORT, () => console.log(`Server is running at http://localhost:${PORT}`));
@@ -45,7 +47,6 @@ app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/score", scoreRoute);
 
 app.use(notFoundHandler);
-
 app.use(errorHandler);
 
 export default app;
