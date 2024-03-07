@@ -28,7 +28,7 @@ export const authLoginController: RequestHandler<RequestBodyTypes> = async (
       const { username } = user;
       if (isPasswordValid) {
         const token = jwt.sign({ username }, JWT_SECRET, {
-          expiresIn: "1h",
+          expiresIn: ".01h",
         });
 
         res.locals.loggedUser = username;
