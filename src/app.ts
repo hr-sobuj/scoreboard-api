@@ -13,6 +13,7 @@ import { MONGO_CONNECTION_STRING_DEVELOPMENT, MONGO_CONNECTION_STRING_PRODUCTION
 
 const app = express();
 
+// cors options
 const corsOptions = {
   origin: true,
   credentials: true,
@@ -22,6 +23,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+// database connection
 try {
   mongoose
     .connect(
@@ -38,14 +40,17 @@ try {
   console.log("Failed to connect database", error);
 }
 
+// middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 
+// route
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/score", scoreRoute);
 
+// extra middleware
 app.use(notFoundHandler);
 app.use(errorHandler);
 
