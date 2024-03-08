@@ -3,7 +3,7 @@ import { AuthModel } from "../../model/authModel";
 import type { AuthTypes } from "../../types/authTypes";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { JWT_SECRET } from "../../config/envConfig";
+import { JWT_SECRET, JWT_SECRET_REFRESH } from "../../config/envConfig";
 
 interface RequestBodyTypes extends Request {
   body: AuthTypes;
@@ -28,22 +28,24 @@ export const authLoginController: RequestHandler<RequestBodyTypes> = async (
       const { username } = user;
       if (isPasswordValid) {
         const token = jwt.sign({ username }, JWT_SECRET, {
-          expiresIn: ".01h",
+          expiresIn: "1h",
         });
 
-        res.locals.loggedUser = username;
+        const rfreshtoken = jwt.sign({ username }, JWT_SECRET_REFRESH);
 
-        res.cookie(
-          "scoreboard",
-          { username, token },
-          {
-            maxAge: 3600000,
-            httpOnly: true,
-            secure: true,
-            // signed: true,
-            sameSite: "none",
-          }
-        );
+        res.cookie('authInfo', { username, token }, {
+          maxAge: 3600000,
+          httpOnly: true,
+          secure: true,
+          sameSite: "none"
+      });
+
+      res.cookie('refreshToken', { username, rfreshtoken }, {
+          maxAge: 3600000,
+          httpOnly: true,
+          secure:true,
+          sameSite:"none"
+      });
 
         res.status(200).json({
           token,

@@ -9,6 +9,7 @@ import {
   scoreErrorHandler,
   scoreValidator,
 } from "../middlewares/score/scoreValidator";
+import { generateRefreshToken } from "../middlewares/common/generateRefreshToken";
 
 const route = Router();
 
