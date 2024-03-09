@@ -28,7 +28,7 @@ export function authGuard(req: RequestBody, res: Response, next: NextFunction) {
 
     if (isValid) {
       const token = jwt.sign({ username }, JWT_SECRET, {
-        expiresIn: '.01h'
+        expiresIn: '1h'
       });
 
       res.cookie('authInfo', { username, token }, {
