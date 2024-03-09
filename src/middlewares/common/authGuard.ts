@@ -28,11 +28,11 @@ export function authGuard(req: RequestBody, res: Response, next: NextFunction) {
 
     if (isValid) {
       const token = jwt.sign({ username }, JWT_SECRET, {
-        expiresIn: '1h'
+        expiresIn: '.01h'
       });
 
       res.cookie('authInfo', { username, token }, {
-        maxAge: 3600000,
+        maxAge: 3600*3600000,
         httpOnly: true,
         secure: true,
         sameSite: "none"

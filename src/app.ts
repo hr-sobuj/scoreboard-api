@@ -9,6 +9,7 @@ import {
   notFoundHandler,
 } from "./middlewares/common/errorHandler";
 import { MONGO_CONNECTION_STRING_DEVELOPMENT, MONGO_CONNECTION_STRING_PRODUCTION, NODE_ENV, PORT } from "./config/envConfig";
+import rateLimit from "express-rate-limit";
 
 
 const app = express();
@@ -39,6 +40,16 @@ try {
 } catch (error) {
   console.log("Failed to connect database", error);
 }
+
+
+// rate limit 
+const limiter=rateLimit({
+  limit:5,
+  windowMs:15*60*1000,
+  message:'Too many request from your IP address. Thats why we blocked it',
+});
+
+app.use(limiter);
 
 // middleware
 app.use(express.json());
