@@ -28,20 +28,20 @@ export const authLoginController: RequestHandler<RequestBodyTypes> = async (
       const { username } = user;
       if (isPasswordValid) {
         const token = jwt.sign({ username }, JWT_SECRET, {
-          expiresIn: "1h",
+          expiresIn: ".01h",
         });
 
         const rfreshtoken = jwt.sign({ username }, JWT_SECRET_REFRESH);
 
         res.cookie('authInfo', { username, token }, {
-          maxAge: 3600000,
+          maxAge: 3600*3600000,
           httpOnly: true,
           secure: true,
           sameSite: "none"
       });
 
       res.cookie('refreshToken', { username, rfreshtoken }, {
-          maxAge: 3600000,
+          maxAge: 3600*3600000,
           httpOnly: true,
           secure:true,
           sameSite:"none"
