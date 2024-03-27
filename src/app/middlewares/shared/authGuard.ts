@@ -32,7 +32,7 @@ export function authGuard(req: RequestBody, res: Response, next: NextFunction) {
       });
 
       res.cookie('authInfo', { username, token }, {
-        maxAge: 3600*3600000,
+        maxAge: 3600 * 3600000,
         httpOnly: true,
         secure: true,
         sameSite: "none"
