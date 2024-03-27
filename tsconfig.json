@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es2016",
     "module": "commonjs",
-    "rootDir": "./src", 
+    "rootDir": "./src",
     "outDir": "./dist",
     "allowJs": true,
     "esModuleInterop": true,
@@ -12,7 +12,14 @@
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "noImplicitAny": true,
+    "paths": {
+      "@/": [
+        "./src"
+      ],
+    }
   },
-  "exclude": ["node_modules",],
-  "composite":true
+  "exclude": [
+    "node_modules",
+  ],
+  "composite": true
 }

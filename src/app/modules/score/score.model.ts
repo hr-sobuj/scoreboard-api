@@ -1,5 +1,5 @@
 import { Document, Schema, model } from "mongoose";
-import type { ScoreTypes } from '../types/scoreTypes';
+import type { ScoreTypes } from './score.interface';
 
 /*
 |--------------------------------------------------------------------------
