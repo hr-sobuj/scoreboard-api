@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import { JWT_SECRET, JWT_SECRET_REFRESH } from "../../config/envConfig";
+import { JWT_SECRET, JWT_SECRET_REFRESH } from "./../../../config/envConfig";
 
 interface RequestBody extends Request {
   username?: string;

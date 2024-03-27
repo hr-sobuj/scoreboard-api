@@ -1,7 +1,7 @@
 import type { RequestHandler } from "express";
 import { check, validationResult } from "express-validator";
 import createError from "http-errors";
-import { AuthModel } from "../../model/authModel";
+import { AuthModel } from "./../../modules/auth/auth.model";
 
 /*
 |--------------------------------------------------------------------------
