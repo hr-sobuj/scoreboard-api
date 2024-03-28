@@ -7,8 +7,6 @@ import type { RequestBodyTypes } from "./auth.interface";
 import { AuthModel } from "./auth.model";
 
 
-
-
 /*
 |--------------------------------------------------------------------------
 | Login controller
@@ -50,6 +48,8 @@ export const authLoginController: RequestHandler<RequestBodyTypes> = async (
                 res.status(200).json({
                     token,
                     msg: "Login Successfull!",
+                    avatar: user.avatar,
+                    role: user.role,
                 });
             } else {
                 res.status(500).json({
@@ -133,6 +133,7 @@ export const authRegistrationController = async (
         const requestBody = {
             ...req.body,
             password: hashPassword,
+            avatar: 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_640.png'
         };
 
         const newUser = new AuthModel(requestBody);
@@ -147,3 +148,28 @@ export const authRegistrationController = async (
         next(error.message);
     }
 };
+
+
+export const avatarUpload = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    let avatar = null;
+    if (req.files && Array.isArray(req.files) && req.files.length > 0) {
+        avatar = req.files[0].filename;
+    }
+
+    try {
+        const result = await AuthModel.findByIdAndUpdate(
+            { _id: id },
+            { $set: { avatar: avatar } },
+            { new: true, useFindAndModify: false }
+        );
+        res.status(200).json({
+            message: "Information was updated successfully!",
+            result
+        });
+    } catch (error) {
+        res.status(500).json({
+            error: "There was a server side error!",
+        });
+    }
+}

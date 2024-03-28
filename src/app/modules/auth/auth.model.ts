@@ -17,6 +17,10 @@ export const authSchema = new Schema<AuthTypes & Document>(
             type: String,
             enum: ["admin", "general"],
         },
+        avatar: {
+            type: String,
+            required: false,
+        }
     },
     {
         timestamps: true,
