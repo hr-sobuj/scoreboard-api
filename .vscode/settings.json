@@ -6,8 +6,8 @@
       "editor.defaultFormatter": "vscode.typescript-language-features"
     },
     "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true,
-      "source.organizeImports": true
+      "source.fixAll.eslint": "explicit",
+      "source.organizeImports": "explicit"
     },
     "eslint.alwaysShowStatus": true,
     "editor.fontSize": 19,

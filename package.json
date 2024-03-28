@@ -19,6 +19,7 @@
     "http-errors": "^2.0.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.2.0",
+    "multer": "^1.4.5-lts.1",
     "ts-node-dev": "^2.0.0"
   },
   "devDependencies": {
@@ -29,6 +30,7 @@
     "@types/http-errors": "^2.0.4",
     "@types/jsonwebtoken": "^9.0.6",
     "@types/mongoose": "^5.11.97",
+    "@types/multer": "^1.4.11",
     "@types/node": "^20.11.24",
     "typescript": "^5.3.3"
   },

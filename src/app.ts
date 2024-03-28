@@ -2,6 +2,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
 import rateLimit from "express-rate-limit";
+import path from "path";
 import { errorHandler, notFoundHandler } from "./app/middlewares/shared/errorHandler";
 import { dbConnection } from "./db/db";
 import rootRouter from './route/index';
@@ -21,6 +22,9 @@ app.use(cors(corsOptions));
 
 // database connection
 dbConnection(app);
+
+// static files
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 // rate limit 
