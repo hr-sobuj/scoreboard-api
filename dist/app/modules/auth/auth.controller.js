@@ -109,7 +109,7 @@ exports.refreshTokenController = (0, createAsync_1.default)((req, res) => __awai
 */
 exports.authRegistrationController = (0, createAsync_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const hashPassword = yield bcrypt_1.default.hash(req.body.password, 10);
-    const requestBody = Object.assign(Object.assign({}, req.body), { password: hashPassword, avatar: 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_640.png' });
+    const requestBody = Object.assign(Object.assign({}, req.body), { password: hashPassword, avatar: 'avatar.webp' });
     const newUser = new auth_model_1.AuthModel(requestBody);
     yield newUser.save();
     if (newUser) {
