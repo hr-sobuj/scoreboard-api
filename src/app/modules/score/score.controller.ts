@@ -1,52 +1,40 @@
 import type { RequestHandler } from "express";
 import { Request, Response } from "express";
-import type { RequestBody } from "./score.interface";
+import createAsync from "../../../shared/createAsync";
 import { ScoreModel } from "./score.model";
 
 
-export const createScore = async (
+export const createScore = createAsync(async (
     req: Request,
     res: Response
 ): Promise<void> => {
-    try {
-        const newScore = new ScoreModel(req.body);
-        await newScore.save();
-        if (newScore) {
-            res.status(200).json({
-                msg: "New score added!",
-                data: newScore,
-            });
-        }
-    } catch (error: any) {
-        res.status(500).json({
-            msg: "Creation failed!",
+    const newScore = new ScoreModel(req.body);
+    await newScore.save();
+    if (newScore) {
+        res.status(200).json({
+            msg: "New score added!",
+            data: newScore,
         });
     }
-};
+});
 
 /*
 |--------------------------------------------------------------------------
 | Update score
 |--------------------------------------------------------------------------
 */
-export const getAllScore: RequestHandler<RequestBody> = async (req, res) => {
-    try {
-        const result = await ScoreModel.find({}, '-createdAt -updatedAt -__v');
-        if (result) {
-            res.status(201).json({
-                data: result,
-            })
-        } else {
-            res.status(500).json({
-                msg: "Operation failed!"
-            })
-        }
-    } catch (error: any) {
+export const getAllScore: RequestHandler = createAsync(async (req, res) => {
+    const result = await ScoreModel.find({}, '-createdAt -updatedAt -__v');
+    if (result) {
+        res.status(201).json({
+            data: result,
+        })
+    } else {
         res.status(500).json({
             msg: "Operation failed!"
         })
     }
-}
+});
 
 
 /*
@@ -54,82 +42,65 @@ export const getAllScore: RequestHandler<RequestBody> = async (req, res) => {
 | Update score
 |--------------------------------------------------------------------------
 */
-export const getScore: RequestHandler<RequestBody> = async (req, res) => {
-    try {
-        const id = req.params.id;
-        const result = await ScoreModel.findOne({ _id: id }, '-createdAt -updatedAt -__v');
+export const getScore: RequestHandler = createAsync(async (req, res) => {
+    const id = req.params.id;
+    const result = await ScoreModel.findOne({ _id: id }, '-createdAt -updatedAt -__v');
 
-        if (result) {
-            res.status(201).json({
-                data: result,
-            })
-        } else {
-            res.status(500).json({
-                msg: "Operation failed!"
-            })
-        }
-    } catch (error: any) {
+    if (result) {
+        res.status(201).json({
+            data: result,
+        })
+    } else {
         res.status(500).json({
             msg: "Operation failed!"
         })
     }
-}
+});
 
 
-export const updateScore = async (
+export const updateScore = createAsync(async (
     req: Request,
     res: Response
 ): Promise<void> => {
-    try {
-        const id = req.params.id;
-        const result = await ScoreModel.findByIdAndUpdate(
-            { _id: id },
-            {
-                $set: {
-                    ...req.body,
-                },
+    const id = req.params.id;
+    const result = await ScoreModel.findByIdAndUpdate(
+        { _id: id },
+        {
+            $set: {
+                ...req.body,
             },
-            {
-                new: true,
-            }
-        );
-        if (result) {
-            res.status(201).json({
-                data: result,
-            });
-        } else {
-            res.status(500).json({
-                msg: "Updation failed!",
-            });
+        },
+        {
+            new: true,
         }
-    } catch (error: any) {
+    );
+    if (result) {
+        res.status(201).json({
+            data: result,
+        });
+    } else {
         res.status(500).json({
             msg: "Updation failed!",
         });
     }
-};
+
+});
 
 
-export const deleteScore = async (
+export const deleteScore = createAsync(async (
     req: Request,
     res: Response
 ): Promise<void> => {
-    try {
-        const id = req.params.id;
-        const result = await ScoreModel.findByIdAndDelete({ _id: id });
-        if (result) {
-            res.status(204).json({
-                msg: "Deleted!",
-            });
-        } else {
-            res.status(400).json({
-                msg: "Deletion failed!",
-            });
-        }
-    } catch (error: any) {
-        res.status(500).json({
-            msg: "Creation failed!",
+    const id = req.params.id;
+    const result = await ScoreModel.findByIdAndDelete({ _id: id });
+    if (result) {
+        res.status(204).json({
+            msg: "Deleted!",
+        });
+    } else {
+        res.status(400).json({
+            msg: "Deletion failed!",
         });
     }
-};
+});
 
