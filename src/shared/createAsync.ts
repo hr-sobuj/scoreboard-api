@@ -1,7 +1,11 @@
-function createAsync() {
-    try {
+import type { NextFunction, Request, RequestHandler, Response } from "express";
 
-    } catch (error) {
-
-    }
+export default function createAsync(handler: RequestHandler) {
+    return (req: Request, res: Response, next: NextFunction) => {
+        try {
+            handler(req, res, next);
+        } catch (error) {
+            next(error);
+        }
+    };
 }
