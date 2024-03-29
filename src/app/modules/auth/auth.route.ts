@@ -1,22 +1,48 @@
 import { Router } from "express";
+import type { RouteItem } from "../../../types/RouteItem";
 import avatarGuard from "../../middlewares/auth/avatarGuard";
 import { authRegistrationErrorHandler, authRegistrationValidator } from "../../middlewares/auth/registrationValidator";
 import { authGuard } from "../../middlewares/shared/authGuard";
 import { authLoginController, authRegistrationController, avatarUpload, refreshTokenController } from "./auth.controller";
 
+
 const route = Router();
 
-route.post(
-    "/registration",
-    authRegistrationValidator,
-    authRegistrationErrorHandler,
-    authRegistrationController
-);
+const routerMap: RouteItem[] = [
+    {
+        method: 'post',
+        path: '/registration',
+        controller: [
+            authRegistrationValidator,
+            authRegistrationErrorHandler,
+            authRegistrationController
+        ]
+    },
+    {
+        method: 'post',
+        path: '/login',
+        controller: [
+            authLoginController
+        ]
+    },
+    {
+        method: 'get',
+        path: '/refresh-token',
+        controller: [
+            refreshTokenController
+        ]
+    },
+    {
+        method: 'post',
+        path: '/upload/avatar/:id',
+        controller: [
+            authGuard, avatarGuard, avatarUpload
+        ]
+    },
+];
 
-route.post("/login", authLoginController);
 
-route.get("/refresh-token", refreshTokenController);
+routerMap.forEach(router => route[router.method](router.path, [...router.controller]))
 
-route.post("/upload/avatar/:id", authGuard, avatarGuard, avatarUpload)
 
 export default route;
