@@ -12,11 +12,14 @@ const app = express();
 
 // cors options
 const corsOptions = {
-  origin: true,
+  origin: ["https://scoreboard-frontend-tsx.vercel.app/", true],
   credentials: true,
   methods: ["GET", "PUT", "POST", "DELETE"],
   maxAge: 3600000,
 };
+
+app.use(cors(corsOptions));
+
 
 app.use(cors(corsOptions));
 
