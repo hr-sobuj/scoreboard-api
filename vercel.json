@@ -20,7 +20,7 @@
     "rewrites": [
         {
             "source": "/(.*)",
-            "destination": "/"
+            "destination": "dist/index.js"
         }
     ]
 }
