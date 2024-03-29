@@ -45,6 +45,12 @@ app.use(cookieParser());
 // route
 app.use("/api/v1/", rootRouter);
 
+// response
+// app.use((req, res, next) => {
+//   responseFormatter(req, res, next);
+// });
+
+
 // extra middleware
 app.use(notFoundHandler);
 app.use(errorHandler);

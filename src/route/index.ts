@@ -2,9 +2,19 @@ import { Router } from 'express';
 import authRoute from './../app/modules/auth/auth.route';
 import scoreRoute from './../app/modules/score/score.route';
 
-const rootRouter = Router();
+const routers = Router();
 
-rootRouter.use("/auth", authRoute);
-rootRouter.use("/score", scoreRoute)
+const rootRouter = [
+    {
+        path: '/auth',
+        route: authRoute
+    },
+    {
+        path: '/score',
+        route: scoreRoute
+    },
+]
 
-export default rootRouter;
+rootRouter.forEach(route => routers.use(route.path, route.route));
+
+export default routers;
