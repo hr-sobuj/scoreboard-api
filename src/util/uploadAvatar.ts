@@ -5,7 +5,6 @@ import path from 'path';
 
 function uploader(subDirectory: string, allowedFileType: string[], maxFileSize: number, errorMsg: string): multer.Multer {
     const UPLOAD_DIR = `${__dirname}/../public/uploads/${subDirectory}/`;
-
     const storage = diskStorage({
         destination(req: Request, file: Express.Multer.File, cb: (error: Error | null, destination: string) => void) {
             cb(null, UPLOAD_DIR);

@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
-import uploader from './../../../util/uploadAvatar';
+import uploader from '../../../util/uploadAvatar';
 
-function uploadAvatar(req: Request, res: Response, next: NextFunction) {
+function avatarGuard(req: Request, res: Response, next: NextFunction) {
     const upload = uploader(
         'avatars',
         ['image/jpg', 'image/png', 'image/jpeg'],
@@ -24,4 +24,4 @@ function uploadAvatar(req: Request, res: Response, next: NextFunction) {
     });
 }
 
-export default uploadAvatar;
+export default avatarGuard;
