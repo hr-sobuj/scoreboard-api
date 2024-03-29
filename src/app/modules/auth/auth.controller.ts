@@ -50,6 +50,8 @@ export const authLoginController: RequestHandler<RequestBodyTypes> = async (
                     msg: "Login Successfull!",
                     avatar: user.avatar,
                     role: user.role,
+                    id: user?._id,
+                    user
                 });
             } else {
                 res.status(500).json({
@@ -164,7 +166,7 @@ export const avatarUpload = async (req: Request, res: Response) => {
             { new: true, useFindAndModify: false }
         );
         res.status(200).json({
-            message: "Information was updated successfully!",
+            message: "Profile picture updated successfully!",
             result
         });
     } catch (error) {
